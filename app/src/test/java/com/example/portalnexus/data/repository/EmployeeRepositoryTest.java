@@ -1,22 +1,24 @@
 package com.example.portalnexus.data.repository;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mockStatic;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.portalnexus.data.model.Employee;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
 public class EmployeeRepositoryTest {
 
     private EmployeeRepository repository;
+    private MockedStatic<Log> mockedLog;
 
     @Mock
     private Context mockContext;
@@ -30,14 +32,21 @@ public class EmployeeRepositoryTest {
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        mockedLog = mockStatic(Log.class);
         repository = EmployeeRepository.getInstance();
+    }
+
+    @After
+    public void tearDown() {
+        if (mockedLog != null) {
+            mockedLog.close();
+        }
     }
 
     @Test
     public void getAll_callsService() {
         repository.getAll(mockContext, mockListCallback);
         assertNotNull(repository);
-        // Note: Real testing would involve mocking EmployeeService inside repository
     }
 
     @Test
