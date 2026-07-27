@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tablet Overrides (sw600dp) -->
+    <dimen name="grid_24">32dp</dimen>
+    <dimen name="grid_32">48dp</dimen>
+    <dimen name="grid_64">80dp</dimen>
+
+    <dimen name="home_title_size">48sp</dimen>
+    <dimen name="home_description_size">20sp</dimen>
+    <dimen name="login_title_size">40sp</dimen>
+
+    <!-- Limites para evitar esticamento excessivo -->
+    <dimen name="card_login_margin_horizontal">80dp</dimen>
+    <dimen name="home_description_margin_horizontal">100dp</dimen>
+    <dimen name="home_button_margin_horizontal">120dp</dimen>
+    <dimen name="form_padding">64dp</dimen>
+</resources>

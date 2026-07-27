@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/grid_24"
         android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="@dimen/home_title_size"
         android:textStyle="bold"
         android:letterSpacing="0.05"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,26 +34,28 @@
         android:id="@+id/txtDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/grid_48"
+        android:layout_marginHorizontal="@dimen/home_description_margin_horizontal"
         android:layout_marginTop="@dimen/grid_16"
         android:gravity="center"
         android:text="@string/app_description"
         android:textColor="@color/glass_white"
-        android:textSize="16sp"
+        android:textSize="@dimen/home_description_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAppNameHome" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAppNameHome"
+        app:layout_constraintWidth_max="@dimen/container_max_width" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEnter"
         style="@style/Widget.PortalNexus.Button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
-        android:layout_marginHorizontal="@dimen/grid_32"
+        android:layout_marginHorizontal="@dimen/home_button_margin_horizontal"
         android:layout_marginBottom="@dimen/grid_64"
         android:text="@string/enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_max="@dimen/container_max_width" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

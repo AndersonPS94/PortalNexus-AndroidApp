@@ -21,7 +21,7 @@
         android:layout_marginBottom="@dimen/grid_32"
         android:text="@string/login"
         android:textColor="@color/white"
-        android:textSize="32sp"
+        android:textSize="@dimen/login_title_size"
         app:layout_constraintBottom_toBottomOf="@+id/headerBg"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -30,10 +30,13 @@
         style="@style/Widget.PortalNexus.Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/grid_24"
+        android:layout_marginHorizontal="@dimen/card_login_margin_horizontal"
         android:layout_marginTop="-24dp"
         app:cardCornerRadius="@dimen/radius_dialog"
-        app:layout_constraintTop_toBottomOf="@+id/headerBg">
+        app:layout_constraintTop_toBottomOf="@+id/headerBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_max="@dimen/container_max_width">
 
         <LinearLayout
             android:layout_width="match_parent"
