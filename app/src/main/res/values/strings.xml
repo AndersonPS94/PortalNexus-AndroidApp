@@ -68,4 +68,6 @@
     <string name="empty_title">Nenhum dado encontrado</string>
     <string name="empty_description">Parece que esta dimensão está vazia. Tente ajustar seus filtros ou verificar sua conexão.</string>
     <string name="keep_logged_in">Manter logado</string>
+    <string name="employee_active">Ativo</string>
+    <string name="employee_inactive">Inativo</string>
 </resources>

@@ -54,6 +54,28 @@
             app:layout_constraintStart_toStartOf="@+id/txtName"
             app:layout_constraintTop_toBottomOf="@+id/txtPosition" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_8"
+            app:cardCornerRadius="@dimen/radius_badge"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/divider"
+            app:layout_constraintStart_toStartOf="@+id/txtName"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmail">
+
+            <TextView
+                android:id="@+id/txtStatus"
+                style="@style/TextAppearance.Material3.LabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/grid_8"
+                android:paddingVertical="@dimen/grid_2"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+
         <LinearLayout
             android:id="@+id/actionsContainer"
             android:layout_width="wrap_content"

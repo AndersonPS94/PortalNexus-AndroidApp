@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -93,28 +96,35 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.txtProfileName.setText(character.getName() != null ? character.getName() : "");
         
-        StringBuilder details = new StringBuilder();
-        details.append("Status: ").append(character.getStatus() != null ? character.getStatus() : "Unknown").append("\n");
-        details.append("Espécie: ").append(character.getSpecies() != null ? character.getSpecies() : "Unknown").append("\n");
-        details.append("Gênero: ").append(character.getGender() != null ? character.getGender() : "Unknown").append("\n");
+        SpannableStringBuilder details = new SpannableStringBuilder();
+        appendBoldLabel(details, "Status: ", (character.getStatus() != null ? character.getStatus() : "Unknown") + "\n");
+        appendBoldLabel(details, "Espécie: ", (character.getSpecies() != null ? character.getSpecies() : "Unknown") + "\n");
+        appendBoldLabel(details, "Gênero: ", (character.getGender() != null ? character.getGender() : "Unknown") + "\n");
         
         String originName = (character.getOrigin() != null && character.getOrigin().getName() != null) 
                 ? character.getOrigin().getName() : "Unknown";
-        details.append("Origem: ").append(originName).append("\n");
+        appendBoldLabel(details, "Origem: ", originName + "\n");
         
         String locationName = (character.getLocation() != null && character.getLocation().getName() != null) 
                 ? character.getLocation().getName() : "Unknown";
-        details.append("Localização: ").append(locationName).append("\n");
+        appendBoldLabel(details, "Localização: ", locationName + "\n");
         
-        details.append("URL: ").append(character.getUrl() != null ? character.getUrl() : "N/A");
-        binding.txtProfileDetails.setText(details.toString());
+        appendBoldLabel(details, "URL: ", (character.getUrl() != null ? character.getUrl() : "N/A"));
+        binding.txtProfileDetails.setText(details);
 
-        StringBuilder advanced = new StringBuilder();
-        advanced.append("ID: ").append(character.getId()).append("\n");
-        advanced.append("Tipo: ").append(character.getType() != null && !character.getType().isEmpty() ? character.getType() : "N/A").append("\n");
-        advanced.append("Episódios: ").append(character.getEpisode() != null ? character.getEpisode().size() : 0).append("\n");
-        advanced.append("Criado em: ").append(character.getCreated() != null ? character.getCreated() : "Unknown");
-        binding.txtAdvancedInfo.setText(advanced.toString());
+        SpannableStringBuilder advanced = new SpannableStringBuilder();
+        appendBoldLabel(advanced, "ID: ", character.getId() + "\n");
+        appendBoldLabel(advanced, "Tipo: ", (character.getType() != null && !character.getType().isEmpty() ? character.getType() : "N/A") + "\n");
+        appendBoldLabel(advanced, "Episódios: ", (character.getEpisode() != null ? character.getEpisode().size() : 0) + "\n");
+        appendBoldLabel(advanced, "Criado em: ", (character.getCreated() != null ? character.getCreated() : "Unknown"));
+        binding.txtAdvancedInfo.setText(advanced);
+    }
+
+    private void appendBoldLabel(SpannableStringBuilder builder, String label, String value) {
+        int start = builder.length();
+        builder.append(label);
+        builder.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), start, builder.length(), 0);
+        builder.append(value);
     }
 
     private void setupListeners() {

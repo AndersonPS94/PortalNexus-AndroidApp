@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.portalnexus.R;
 import com.example.portalnexus.data.model.Employee;
 import com.example.portalnexus.databinding.ItemEmployeeBinding;
 import com.example.portalnexus.utils.ImageUtils;
@@ -63,6 +64,16 @@ public class EmployeeAdapter extends ListAdapter<Employee, EmployeeAdapter.ViewH
             binding.txtName.setText(employee.getName() != null ? employee.getName() : "");
             binding.txtPosition.setText(employee.getPosition() != null ? employee.getPosition() : "");
             binding.txtEmail.setText(employee.getEmail() != null ? employee.getEmail() : "");
+
+            if (employee.isActive()) {
+                binding.txtStatus.setText(R.string.employee_active);
+                binding.txtStatus.setTextColor(itemView.getContext().getColor(R.color.success));
+                binding.statusBadge.setStrokeColor(android.content.res.ColorStateList.valueOf(itemView.getContext().getColor(R.color.success)));
+            } else {
+                binding.txtStatus.setText(R.string.employee_inactive);
+                binding.txtStatus.setTextColor(itemView.getContext().getColor(R.color.onSurfaceVariant));
+                binding.statusBadge.setStrokeColor(android.content.res.ColorStateList.valueOf(itemView.getContext().getColor(R.color.divider)));
+            }
 
             ImageUtils.loadImage(binding.imgEmployee, employee.getPhoto());
             binding.imgEmployee.setContentDescription("Foto do funcionário " + employee.getName() + " - Cargo: " + employee.getPosition());
