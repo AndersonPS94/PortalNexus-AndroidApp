@@ -40,7 +40,6 @@ public class CurrencyTextWatcher implements TextWatcher {
             editText.setText(formatted);
             editText.setSelection(formatted.length());
         } catch (Exception e) {
-            // Ignore
         }
 
         editText.addTextChangedListener(this);

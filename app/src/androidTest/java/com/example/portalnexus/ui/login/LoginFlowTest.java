@@ -31,6 +31,7 @@ public class LoginFlowTest {
         onView(withId(R.id.txtLoginTitle)).check(matches(isDisplayed()));
         onView(withId(R.id.editEmail)).check(matches(isDisplayed()));
         onView(withId(R.id.editPassword)).check(matches(isDisplayed()));
+        onView(withId(R.id.checkKeepLoggedIn)).check(matches(isDisplayed()));
         onView(withId(R.id.btnLogin)).check(matches(isDisplayed()));
     }
 
@@ -39,8 +40,6 @@ public class LoginFlowTest {
         onView(withId(R.id.editEmail)).perform(typeText("invalid-email"), closeSoftKeyboard());
         onView(withId(R.id.btnLogin)).perform(click());
         
-        // O toast ou mensagem de erro deve aparecer. 
-        // Como o LoginViewModel emite erro, verificamos se o login NÃO mudou de tela.
         onView(withId(R.id.txtLoginTitle)).check(matches(isDisplayed()));
     }
 
@@ -50,9 +49,6 @@ public class LoginFlowTest {
         onView(withId(R.id.editPassword)).perform(typeText("123456"), closeSoftKeyboard());
         onView(withId(R.id.btnLogin)).perform(click());
 
-        // Aguarda transição para o Menu (simulado pelo delay no ViewModel)
-        // Em testes instrumentados reais com delay, usaríamos IdlingResource.
-        // Para este desafio, vamos apenas garantir que a intenção de navegação esteja lá.
         try { Thread.sleep(2000); } catch (InterruptedException e) { }
         
         onView(withId(R.id.txtMenuTitle)).check(matches(isDisplayed()));

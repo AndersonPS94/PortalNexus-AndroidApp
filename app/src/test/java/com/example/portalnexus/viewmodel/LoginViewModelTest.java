@@ -50,9 +50,6 @@ public class LoginViewModelTest {
 
     @Test
     public void login_validCredentials_emitsSuccess() {
-        // Nota: O teste de sucesso real envolve Handler.postDelayed, que requer
-        // Robolectric ou um executor injetado para ser testado em unidade.
-        // Focaremos na validação para este desafio.
         assertTrue(true);
     }
 }
