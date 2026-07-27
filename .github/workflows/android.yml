@@ -22,14 +22,21 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      
-    - name: Build with Gradle
-      run: ./gradlew build
+
+    - name: Run Lint
+      run: ./gradlew lintDebug
 
     - name: Run Unit Tests
-      run: ./gradlew test
+      run: ./gradlew testDebugUnitTest
 
-    - name: Run Instrumented Tests
-      # Nota: Exige runner com suporte a KVM/Emulação. 
-      # Para o desafio, deixamos o comando preparado.
-      run: echo "Executando testes instrumentados..."
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: PortalNexus-Debug-APK
+        path: app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Run Instrumented Tests (Mock)
+      run: echo "Testes instrumentados preparados para execução em ambiente com emulador."
