@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Modo Escuro -->
+    <color name="background">#121212</color>
+    <color name="onBackground">#E1E1E1</color>
+
+    <color name="surface">#1E1E1E</color>
+    <color name="onSurface">#E1E1E1</color>
+    <color name="onSurfaceVariant">#B0B0B0</color>
+
+    <color name="divider">#2C2C2C</color>
+    <color name="disabled">#4A4A4A</color>
+
+    <color name="glass_white">#1AFFFFFF</color>
+</resources>

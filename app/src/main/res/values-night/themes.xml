@@ -4,9 +4,11 @@
         <item name="colorOnPrimary">@color/onPrimary</item>
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorOnSecondary">@color/onSecondary</item>
-        <item name="android:windowBackground">@color/dark_background</item>
-        <item name="colorSurface">@color/dark_surface</item>
-        <item name="colorOnSurface">@color/dark_onSurface</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+        <item name="colorSurfaceVariant">@color/divider</item>
+        <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
         <item name="colorError">@color/error</item>
         <item name="colorOnError">@color/onError</item>
 
@@ -14,10 +16,13 @@
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <item name="materialButtonStyle">@style/Widget.PortalNexus.Button</item>
+        <item name="textInputStyle">@style/Widget.PortalNexus.TextInputLayout</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/dark_background</item>
+        <item name="windowSplashScreenBackground">@color/background</item>
         <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
         <item name="postSplashScreenTheme">@style/Theme.PortalNexus.Splash</item>
     </style>
