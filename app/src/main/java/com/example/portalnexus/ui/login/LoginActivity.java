@@ -59,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel.loginSuccess.observe(this, token -> {
             if (token != null && !token.isEmpty()) {
-                sessionManager.saveSession(token, "Usuário Backend", binding.editEmail.getText().toString());
+                boolean keepLoggedIn = binding.checkKeepLoggedIn.isChecked();
+                sessionManager.saveSession(token, "Usuário Backend", binding.editEmail.getText().toString(), keepLoggedIn);
                 startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                 finishAffinity();
             }

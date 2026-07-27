@@ -69,6 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportPostponeEnterTransition();
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -81,6 +82,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         setupUI();
         setupListeners();
+        
+        binding.imgProfile.setTransitionName("hero_image");
+        startPostponedEnterTransition();
     }
 
     private void setupUI() {

@@ -9,6 +9,7 @@ public class Constants {
     public static final String KEY_TOKEN = "session_token";
     public static final String KEY_USER_NAME = "user_name";
     public static final String KEY_USER_EMAIL = "user_email";
+    public static final String KEY_KEEP_LOGGED_IN = "keep_logged_in";
     
     public static final int MAX_PAGES = 3;
 }

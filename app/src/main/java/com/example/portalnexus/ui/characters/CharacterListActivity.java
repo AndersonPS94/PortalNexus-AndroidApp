@@ -2,6 +2,8 @@ package com.example.portalnexus.ui.characters;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -37,6 +40,9 @@ public class CharacterListActivity extends AppCompatActivity {
     private String currentSpeciesFilter = "";
     
     private Parcelable recyclerViewState;
+    
+    private final Handler searchHandler = new Handler(Looper.getMainLooper());
+    private Runnable searchRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +71,12 @@ public class CharacterListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        adapter = new CharacterAdapter(character -> {
+        adapter = new CharacterAdapter((character, sharedView) -> {
             Intent intent = new Intent(CharacterListActivity.this, ProfileActivity.class);
             intent.putExtra("character", character);
-            startActivity(intent);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this, sharedView, "hero_image");
+            startActivity(intent, options.toBundle());
         });
 
         binding.rvCharacters.setLayoutManager(new LinearLayoutManager(this));
@@ -228,10 +236,13 @@ public class CharacterListActivity extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    if (newText.isEmpty() && !currentSearchName.isEmpty()) {
-                        currentSearchName = "";
+                    if (searchRunnable != null) searchHandler.removeCallbacks(searchRunnable);
+                    
+                    searchRunnable = () -> {
+                        currentSearchName = newText;
                         syncAndApplyFilters();
-                    }
+                    };
+                    searchHandler.postDelayed(searchRunnable, 500);
                     return true;
                 }
             });

@@ -10,6 +10,8 @@ import androidx.core.splashscreen.SplashScreen;
 
 import com.example.portalnexus.databinding.ActivitySplashBinding;
 import com.example.portalnexus.ui.home.HomeActivity;
+import com.example.portalnexus.ui.menu.MenuActivity;
+import com.example.portalnexus.utils.SessionManager;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
@@ -21,8 +23,16 @@ public class SplashActivity extends AppCompatActivity {
         ActivitySplashBinding binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        SessionManager sessionManager = new SessionManager(this);
+
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+            Intent intent;
+            if (sessionManager.isLoggedIn() && sessionManager.isKeepLoggedInEnabled()) {
+                intent = new Intent(SplashActivity.this, MenuActivity.class);
+            } else {
+                intent = new Intent(SplashActivity.this, HomeActivity.class);
+            }
+            startActivity(intent);
             finish();
         }, 2000);
     }

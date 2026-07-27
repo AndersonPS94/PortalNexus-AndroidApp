@@ -3,6 +3,7 @@ package com.example.portalnexus.adapter;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -82,11 +83,12 @@ public class CharacterAdapter extends ListAdapter<Character, CharacterAdapter.Vi
             GradientDrawable background = (GradientDrawable) binding.statusIndicator.getBackground();
             background.setColor(color);
 
-            itemView.setOnClickListener(v -> listener.onCharacterClick(character));
+            binding.imgCharacter.setTransitionName("hero_" + character.getId());
+            itemView.setOnClickListener(v -> listener.onCharacterClick(character, binding.imgCharacter));
         }
     }
 
     public interface OnCharacterClickListener {
-        void onCharacterClick(Character character);
+        void onCharacterClick(Character character, View sharedView);
     }
 }
