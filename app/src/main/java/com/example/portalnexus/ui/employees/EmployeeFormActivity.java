@@ -263,6 +263,7 @@ public class EmployeeFormActivity extends AppCompatActivity {
         String position = binding.editPosition.getText().toString().trim();
         String email = binding.editEmail.getText().toString().trim();
         double salary = CurrencyTextWatcher.parseCurrencyValue(binding.editSalary.getText().toString());
+        Log.d(TAG, "Parsed salary to save: " + salary);
         boolean active = binding.switchActive.isChecked();
 
         Log.d(TAG, "Saving employee. Photo URI: " + currentPhotoUri);

@@ -30,16 +30,21 @@ public class CurrencyTextWatcher implements TextWatcher {
 
         editText.removeTextChangedListener(this);
 
-        String cleanString = s.toString().replaceAll("[R$,.\\s]", "");
+        // Remove tudo que não é dígito
+        String cleanString = s.toString().replaceAll("[^0-9]", "");
         if (cleanString.isEmpty()) cleanString = "0";
 
         try {
-            BigDecimal parsed = new BigDecimal(cleanString).setScale(2, BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR);
+            // Converte para BigDecimal e divide por 100 para ter as casas decimais
+            BigDecimal parsed = new BigDecimal(cleanString)
+                    .divide(new BigDecimal(100), 2, java.math.RoundingMode.HALF_UP);
+            
             String formatted = NumberFormat.getCurrencyInstance(locale).format(parsed);
 
             editText.setText(formatted);
             editText.setSelection(formatted.length());
         } catch (Exception e) {
+            android.util.Log.e("CurrencyTextWatcher", "Error formatting currency", e);
         }
 
         editText.addTextChangedListener(this);

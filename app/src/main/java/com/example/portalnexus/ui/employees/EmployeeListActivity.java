@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.portalnexus.R;
 import com.example.portalnexus.adapter.EmployeeAdapter;
 import com.example.portalnexus.data.model.Employee;
 import com.example.portalnexus.databinding.ActivityEmployeeListBinding;
@@ -104,7 +105,11 @@ public class EmployeeListActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        binding.swipeRefresh.setOnRefreshListener(() -> viewModel.loadEmployees());
+        binding.swipeRefresh.setColorSchemeColors(getColor(R.color.primary), getColor(R.color.accent));
+        binding.swipeRefresh.setOnRefreshListener(() -> {
+            android.util.Log.d("EmployeeList", "Manual refresh triggered");
+            viewModel.loadEmployees();
+        });
 
         binding.fabAdd.setOnClickListener(v -> {
             startActivity(new Intent(EmployeeListActivity.this, EmployeeFormActivity.class));

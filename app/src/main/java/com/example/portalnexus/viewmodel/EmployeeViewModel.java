@@ -32,6 +32,7 @@ public class EmployeeViewModel extends AndroidViewModel {
     }
 
     public void loadEmployees() {
+        android.util.Log.d("EmployeeViewModel", "loadEmployees called");
         _isLoading.setValue(true);
         repository.getAll(getApplication(), new EmployeeRepository.EmployeeListCallback() {
             @Override

@@ -36,6 +36,7 @@ public class EmployeeAdapter extends ListAdapter<Employee, EmployeeAdapter.ViewH
                     Objects.equals(oldItem.getPosition(), newItem.getPosition()) &&
                     Objects.equals(oldItem.getEmail(), newItem.getEmail()) &&
                     Objects.equals(oldItem.getPhoto(), newItem.getPhoto()) &&
+                    oldItem.getSalary() == newItem.getSalary() &&
                     oldItem.isActive() == newItem.isActive();
         }
     };
@@ -64,6 +65,9 @@ public class EmployeeAdapter extends ListAdapter<Employee, EmployeeAdapter.ViewH
             binding.txtName.setText(employee.getName() != null ? employee.getName() : "");
             binding.txtPosition.setText(employee.getPosition() != null ? employee.getPosition() : "");
             binding.txtEmail.setText(employee.getEmail() != null ? employee.getEmail() : "");
+
+            java.text.NumberFormat nf = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("pt", "BR"));
+            binding.txtSalary.setText(nf.format(employee.getSalary()));
 
             if (employee.isActive()) {
                 binding.txtStatus.setText(R.string.employee_active);

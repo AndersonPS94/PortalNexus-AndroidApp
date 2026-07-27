@@ -76,6 +76,19 @@
                 android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
 
+        <TextView
+            android:id="@+id/txtSalary"
+            style="@style/TextAppearance.Material3.LabelSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/grid_16"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/statusBadge"
+            app:layout_constraintEnd_toStartOf="@+id/actionsContainer"
+            app:layout_constraintStart_toEndOf="@+id/statusBadge"
+            app:layout_constraintTop_toTopOf="@+id/statusBadge" />
+
         <LinearLayout
             android:id="@+id/actionsContainer"
             android:layout_width="wrap_content"
