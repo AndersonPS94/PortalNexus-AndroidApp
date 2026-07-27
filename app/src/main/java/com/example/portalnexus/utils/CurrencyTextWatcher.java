@@ -47,9 +47,13 @@ public class CurrencyTextWatcher implements TextWatcher {
 
     public static double parseCurrencyValue(String value) {
         if (value == null || value.isEmpty()) return 0.0;
-        String clean = value.replaceAll("[R$,\\s]", "").replace(".", "").replace(",", ".");
+        // Remove tudo que não é dígito para evitar erros com separadores de milhar e decimal
+        String clean = value.replaceAll("[^0-9]", "");
+        if (clean.isEmpty()) return 0.0;
         try {
-            return Double.parseDouble(clean);
+            // Como a string limpa contém todos os dígitos (incluindo centavos), 
+            // dividimos por 100 para obter o valor real em double.
+            return Double.parseDouble(clean) / 100.0;
         } catch (NumberFormatException e) {
             return 0.0;
         }

@@ -3,11 +3,11 @@
     android:shape="oval">
     <stroke
         android:width="2dp"
-        android:color="@color/accent" />
+        android:color="@color/portal_accent" />
     <gradient
-        android:centerColor="#4000CEC9"
+        android:centerColor="@color/portal_accent_glow"
         android:endColor="#00000000"
-        android:startColor="#00CEC9"
+        android:startColor="@color/portal_accent"
         android:type="radial"
         android:gradientRadius="100dp"/>
 </shape>

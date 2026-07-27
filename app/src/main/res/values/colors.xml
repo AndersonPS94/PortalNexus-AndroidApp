@@ -27,9 +27,11 @@
     <color name="divider">#E6E8EF</color>
     <color name="disabled">#BDBDBD</color>
 
-    <!-- Auxiliares -->
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="glass_white">#CCFFFFFF</color>
+    <!-- Gradientes e Efeitos -->
+    <color name="gradient_start">#6C5CE7</color>
+    <color name="gradient_center">#2D3436</color>
+    <color name="gradient_end">#121212</color>
+    <color name="portal_accent">#00CEC9</color>
+    <color name="portal_accent_glow">#4000CEC9</color>
     <color name="portal_glow">#406C5CE7</color>
 </resources>

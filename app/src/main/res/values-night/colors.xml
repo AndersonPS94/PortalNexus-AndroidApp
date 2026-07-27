@@ -11,5 +11,16 @@
     <color name="divider">#2C2C2C</color>
     <color name="disabled">#4A4A4A</color>
 
-    <color name="glass_white">#1AFFFFFF</color>
+    <color name="glass_white">#B3FFFFFF</color>
+
+    <!-- Cores de Destaque (Consistentes com o tema escuro) -->
+    <color name="primary">#8E83EF</color> <!-- Um roxo levemente mais claro para melhor contraste -->
+    <color name="accent">#12E2E1</color>
+
+    <!-- Gradientes e Efeitos (Modo Noturno) -->
+    <color name="gradient_start">#483D8B</color> <!-- Roxo mais profundo -->
+    <color name="gradient_center">#1B1D29</color>
+    <color name="gradient_end">#000000</color>
+    <color name="portal_accent">@color/accent</color>
+    <color name="portal_accent_glow">#3312E2E1</color>
 </resources>
