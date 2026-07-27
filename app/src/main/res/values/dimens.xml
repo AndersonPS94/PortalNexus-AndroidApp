@@ -34,7 +34,6 @@
     <dimen name="portal_size">200dp</dimen>
     <dimen name="logo_splash_size">120dp</dimen>
 
-    <!-- Adaptabilidade -->
     <dimen name="container_max_width">480dp</dimen>
     <dimen name="form_padding">24dp</dimen>
     <dimen name="home_title_size">36sp</dimen>

@@ -30,12 +30,10 @@ public class CurrencyTextWatcher implements TextWatcher {
 
         editText.removeTextChangedListener(this);
 
-        // Remove tudo que não é dígito
         String cleanString = s.toString().replaceAll("[^0-9]", "");
         if (cleanString.isEmpty()) cleanString = "0";
 
         try {
-            // Converte para BigDecimal e divide por 100 para ter as casas decimais
             BigDecimal parsed = new BigDecimal(cleanString)
                     .divide(new BigDecimal(100), 2, java.math.RoundingMode.HALF_UP);
             
@@ -52,12 +50,9 @@ public class CurrencyTextWatcher implements TextWatcher {
 
     public static double parseCurrencyValue(String value) {
         if (value == null || value.isEmpty()) return 0.0;
-        // Remove tudo que não é dígito para evitar erros com separadores de milhar e decimal
         String clean = value.replaceAll("[^0-9]", "");
         if (clean.isEmpty()) return 0.0;
         try {
-            // Como a string limpa contém todos os dígitos (incluindo centavos), 
-            // dividimos por 100 para obter o valor real em double.
             return Double.parseDouble(clean) / 100.0;
         } catch (NumberFormatException e) {
             return 0.0;

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Cores Base -->
     <color name="primary">#6C5CE7</color>
     <color name="primary_dark">#5A4AD1</color>
     <color name="onPrimary">#FFFFFF</color>
@@ -16,7 +15,6 @@
     <color name="error">#E53935</color>
     <color name="onError">#FFFFFF</color>
 
-    <!-- Modo Claro (Padrão) -->
     <color name="background">#F8F9FC</color>
     <color name="onBackground">#1B1D29</color>
 
@@ -27,7 +25,6 @@
     <color name="divider">#E6E8EF</color>
     <color name="disabled">#BDBDBD</color>
 
-    <!-- Gradientes e Efeitos -->
     <color name="gradient_start">#6C5CE7</color>
     <color name="gradient_center">#2D3436</color>
     <color name="gradient_end">#121212</color>

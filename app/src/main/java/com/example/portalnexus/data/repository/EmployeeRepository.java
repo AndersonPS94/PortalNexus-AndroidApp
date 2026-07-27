@@ -15,7 +15,6 @@ public class EmployeeRepository {
         this.employeeService = new EmployeeService();
     }
 
-    // Constructor for testing
     EmployeeRepository(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
