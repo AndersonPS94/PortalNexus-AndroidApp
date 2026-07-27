@@ -34,4 +34,6 @@
     <color name="portal_accent">#00CEC9</color>
     <color name="portal_accent_glow">#4000CEC9</color>
     <color name="portal_glow">#406C5CE7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

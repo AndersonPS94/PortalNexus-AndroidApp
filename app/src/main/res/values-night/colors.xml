@@ -23,4 +23,6 @@
     <color name="gradient_end">#000000</color>
     <color name="portal_accent">@color/accent</color>
     <color name="portal_accent_glow">#3312E2E1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
