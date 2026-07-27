@@ -13,13 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portalnexus.data.model.Character;
 import com.example.portalnexus.databinding.ItemCharacterBinding;
+import com.example.portalnexus.databinding.ItemLoadingFooterBinding;
 import com.example.portalnexus.utils.ImageUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class CharacterAdapter extends ListAdapter<Character, CharacterAdapter.ViewHolder> {
+public class CharacterAdapter extends ListAdapter<Character, RecyclerView.ViewHolder> {
+
+    private static final int VIEW_TYPE_ITEM = 0;
+    private static final int VIEW_TYPE_LOADING = 1;
 
     private final OnCharacterClickListener listener;
+    private boolean isLoading = false;
 
     public CharacterAdapter(OnCharacterClickListener listener) {
         super(DIFF_CALLBACK);
@@ -29,6 +36,7 @@ public class CharacterAdapter extends ListAdapter<Character, CharacterAdapter.Vi
     private static final DiffUtil.ItemCallback<Character> DIFF_CALLBACK = new DiffUtil.ItemCallback<Character>() {
         @Override
         public boolean areItemsTheSame(@NonNull Character oldItem, @NonNull Character newItem) {
+            if (oldItem.getId() == -1 || newItem.getId() == -1) return false;
             return oldItem.getId() == newItem.getId();
         }
 
@@ -40,22 +48,53 @@ public class CharacterAdapter extends ListAdapter<Character, CharacterAdapter.Vi
         }
     };
 
+    @Override
+    public int getItemViewType(int position) {
+        if (isLoading && position == getItemCount() - 1) {
+            return VIEW_TYPE_LOADING;
+        }
+        return VIEW_TYPE_ITEM;
+    }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_LOADING) {
+            ItemLoadingFooterBinding loadingBinding = ItemLoadingFooterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new LoadingViewHolder(loadingBinding);
+        }
         ItemCharacterBinding binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(binding);
+        return new ItemViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(getItem(position), listener);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ItemViewHolder) {
+            ((ItemViewHolder) holder).bind(getItem(position), listener);
+        }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemCount() {
+        int count = super.getItemCount();
+        return isLoading ? count + 1 : count;
+    }
+
+    public void setLoading(boolean loading) {
+        if (this.isLoading != loading) {
+            this.isLoading = loading;
+            if (loading) {
+                notifyItemInserted(super.getItemCount());
+            } else {
+                notifyItemRemoved(super.getItemCount());
+            }
+        }
+    }
+
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
         private final ItemCharacterBinding binding;
 
-        public ViewHolder(ItemCharacterBinding binding) {
+        public ItemViewHolder(ItemCharacterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -84,7 +123,15 @@ public class CharacterAdapter extends ListAdapter<Character, CharacterAdapter.Vi
             background.setColor(color);
 
             binding.imgCharacter.setTransitionName("hero_" + character.getId());
+            binding.imgCharacter.setContentDescription("Foto de " + character.getName() + " - Status: " + character.getStatus());
+
             itemView.setOnClickListener(v -> listener.onCharacterClick(character, binding.imgCharacter));
+        }
+    }
+
+    public static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        public LoadingViewHolder(ItemLoadingFooterBinding binding) {
+            super(binding.getRoot());
         }
     }
 

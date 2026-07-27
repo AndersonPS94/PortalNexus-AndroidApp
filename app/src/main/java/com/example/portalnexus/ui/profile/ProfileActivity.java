@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -21,6 +20,7 @@ import com.example.portalnexus.databinding.ActivityProfileBinding;
 import com.example.portalnexus.utils.DialogHelper;
 import com.example.portalnexus.utils.ImageUtils;
 import com.example.portalnexus.utils.PermissionHelper;
+import com.example.portalnexus.utils.SnackbarHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 "Câmera Desativada",
                                 "Você negou o acesso à câmera. Por favor, habilite nas configurações para registrar personagens.");
                     } else {
-                        Toast.makeText(this, "Permissão de câmera negada", Toast.LENGTH_SHORT).show();
+                        SnackbarHelper.show(binding.getRoot(), "Permissão de câmera negada", SnackbarHelper.Type.ERROR);
                     }
                 }
             }
@@ -161,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity {
         try {
             photoFile = createImageFile();
         } catch (IOException ex) {
-            Toast.makeText(this, "Erro ao criar arquivo de imagem", Toast.LENGTH_SHORT).show();
+            SnackbarHelper.show(binding.getRoot(), "Erro ao criar arquivo de imagem", SnackbarHelper.Type.ERROR);
         }
         
         if (photoFile != null) {
@@ -185,15 +185,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 Log.d("ProfileActivity", "POST simulado com sucesso: " + result);
-                runOnUiThread(() -> Toast.makeText(ProfileActivity.this, 
-                        "Captura enviada com sucesso ao Nexo!", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> SnackbarHelper.show(binding.getRoot(), "Captura enviada com sucesso ao Nexo!", SnackbarHelper.Type.SUCCESS));
             }
 
             @Override
             public void onError(String message) {
                 Log.e("ProfileActivity", "Erro no POST simulado: " + message);
-                runOnUiThread(() -> Toast.makeText(ProfileActivity.this, 
-                        "Falha ao sincronizar captura.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> SnackbarHelper.show(binding.getRoot(), "Falha ao sincronizar captura.", SnackbarHelper.Type.ERROR));
             }
         });
     }

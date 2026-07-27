@@ -65,6 +65,7 @@ public class EmployeeAdapter extends ListAdapter<Employee, EmployeeAdapter.ViewH
             binding.txtEmail.setText(employee.getEmail() != null ? employee.getEmail() : "");
 
             ImageUtils.loadImage(binding.imgEmployee, employee.getPhoto());
+            binding.imgEmployee.setContentDescription("Foto do funcionário " + employee.getName() + " - Cargo: " + employee.getPosition());
 
             itemView.setOnClickListener(v -> listener.onEdit(employee));
             binding.btnEdit.setOnClickListener(v -> listener.onEdit(employee));

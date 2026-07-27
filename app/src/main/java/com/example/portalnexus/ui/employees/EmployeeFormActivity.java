@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.portalnexus.R;
 import com.example.portalnexus.data.model.Employee;
 import com.example.portalnexus.databinding.ActivityEmployeeFormBinding;
+import com.example.portalnexus.utils.CurrencyTextWatcher;
 import com.example.portalnexus.utils.DialogHelper;
 import com.example.portalnexus.utils.ImageUtils;
 import com.example.portalnexus.utils.PermissionHelper;
@@ -28,6 +29,7 @@ import com.example.portalnexus.viewmodel.EmployeeViewModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -125,7 +127,10 @@ public class EmployeeFormActivity extends AppCompatActivity {
         binding.editName.setText(employee.getName());
         binding.editPosition.setText(employee.getPosition());
         binding.editEmail.setText(employee.getEmail());
-        binding.editSalary.setText(String.valueOf(employee.getSalary()));
+        
+        String formattedSalary = NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(employee.getSalary());
+        binding.editSalary.setText(formattedSalary);
+        
         binding.switchActive.setChecked(employee.isActive());
         
         currentPhotoUri = employee.getPhoto();
@@ -144,6 +149,8 @@ public class EmployeeFormActivity extends AppCompatActivity {
     }
 
     private void setupTextWatchers() {
+        binding.editSalary.addTextChangedListener(new CurrencyTextWatcher(binding.editSalary));
+
         binding.editName.addTextChangedListener(new SimpleTextWatcher() {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
                 binding.inputName.setError(null);
@@ -244,13 +251,6 @@ public class EmployeeFormActivity extends AppCompatActivity {
         if (salaryStr.isEmpty()) {
             binding.inputSalary.setError(getString(R.string.salary_required));
             isValid = false;
-        } else {
-            try {
-                Double.parseDouble(salaryStr);
-            } catch (NumberFormatException e) {
-                binding.inputSalary.setError(getString(R.string.invalid_salary));
-                isValid = false;
-            }
         }
 
         return isValid;
@@ -262,7 +262,7 @@ public class EmployeeFormActivity extends AppCompatActivity {
         String name = binding.editName.getText().toString().trim();
         String position = binding.editPosition.getText().toString().trim();
         String email = binding.editEmail.getText().toString().trim();
-        double salary = Double.parseDouble(binding.editSalary.getText().toString().trim());
+        double salary = CurrencyTextWatcher.parseCurrencyValue(binding.editSalary.getText().toString());
         boolean active = binding.switchActive.isChecked();
 
         Log.d(TAG, "Saving employee. Photo URI: " + currentPhotoUri);

@@ -11,6 +11,7 @@ import com.example.portalnexus.adapter.EmployeeAdapter;
 import com.example.portalnexus.data.model.Employee;
 import com.example.portalnexus.databinding.ActivityEmployeeListBinding;
 import com.example.portalnexus.utils.DialogHelper;
+import com.example.portalnexus.utils.SnackbarHelper;
 import com.example.portalnexus.viewmodel.EmployeeViewModel;
 
 public class EmployeeListActivity extends AppCompatActivity {
@@ -89,7 +90,7 @@ public class EmployeeListActivity extends AppCompatActivity {
         viewModel.error.observe(this, error -> {
             binding.swipeRefresh.setRefreshing(false);
             if (error != null) {
-                DialogHelper.showError(this, "Erro", error);
+                SnackbarHelper.show(binding.getRoot(), error, SnackbarHelper.Type.ERROR);
             }
         });
         
@@ -97,6 +98,7 @@ public class EmployeeListActivity extends AppCompatActivity {
             if (success != null && success) {
                 viewModel.resetOperationSuccess();
                 viewModel.loadEmployees();
+                SnackbarHelper.show(binding.getRoot(), "Operação realizada com sucesso!", SnackbarHelper.Type.SUCCESS);
             }
         });
     }

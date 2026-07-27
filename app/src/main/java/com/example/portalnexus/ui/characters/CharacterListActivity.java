@@ -91,7 +91,7 @@ public class CharacterListActivity extends AppCompatActivity {
                     int firstVisible = layoutManager.findFirstVisibleItemPosition();
                     binding.fabScrollToTop.setVisibility(firstVisible > 5 ? View.VISIBLE : View.GONE);
                     
-                    if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                    if (dy > 0 && layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
                         viewModel.loadCharacters(true);
                     }
                 }
@@ -108,16 +108,22 @@ public class CharacterListActivity extends AppCompatActivity {
                 }
             });
             binding.swipeRefresh.setRefreshing(false);
+            adapter.setLoading(false);
         });
 
         viewModel.isLoading.observe(this, isLoading -> {
             if (!binding.swipeRefresh.isRefreshing()) {
-                binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+                if (adapter.getItemCount() > 0 && isLoading) {
+                    adapter.setLoading(true);
+                } else {
+                    binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+                }
             }
         });
 
         viewModel.error.observe(this, error -> {
             binding.swipeRefresh.setRefreshing(false);
+            adapter.setLoading(false);
             if (error != null) {
                 binding.errorView.setVisibility(View.VISIBLE);
                 binding.rvCharacters.setVisibility(View.GONE);
