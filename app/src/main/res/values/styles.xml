@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.PortalNexus.Button" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.PortalNexus.Button</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingLeft">@dimen/grid_24</item>
+        <item name="android:paddingRight">@dimen/grid_24</item>
+    </style>
+
+    <style name="Widget.PortalNexus.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.PortalNexus.Button</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.PortalNexus.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.PortalNexus.Button</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+    </style>
+
+    <style name="Widget.PortalNexus.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearance">@style/ShapeAppearance.PortalNexus.Input</item>
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="android:paddingBottom">@dimen/grid_8</item>
+    </style>
+
+    <style name="Widget.PortalNexus.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="shapeAppearance">@style/ShapeAppearance.PortalNexus.Card</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="android:layout_margin">@dimen/grid_8</item>
+    </style>
+
+    <style name="TextAppearance.PortalNexus.Display" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textColor">@color/onBackground</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.PortalNexus.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/onBackground</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.PortalNexus.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/onSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.PortalNexus.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/onSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.PortalNexus.Label" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

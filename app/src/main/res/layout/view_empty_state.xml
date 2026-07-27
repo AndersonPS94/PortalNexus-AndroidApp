@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/grid_32">
+
+    <ImageView
+        android:id="@+id/imgEmptyState"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:alpha="0.8"
+        android:src="@drawable/iconapp"
+        android:contentDescription="@string/empty" />
+
+    <TextView
+        android:id="@+id/txtEmptyTitle"
+        style="@style/TextAppearance.PortalNexus.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_24"
+        android:gravity="center"
+        android:text="@string/empty_title" />
+
+    <TextView
+        android:id="@+id/txtEmptyDescription"
+        style="@style/TextAppearance.PortalNexus.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_8"
+        android:gravity="center"
+        android:text="@string/empty_description" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEmptyAction"
+        style="@style/Widget.PortalNexus.Button.Tonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_32"
+        android:text="@string/retry"
+        android:visibility="gone" />
+
+</LinearLayout>

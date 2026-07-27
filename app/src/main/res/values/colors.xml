@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6C5CE7</color>
+    <color name="primary_dark">#5A4AD1</color>
+    <color name="onPrimary">#FFFFFF</color>
+
+    <color name="secondary">#0984E3</color>
+    <color name="onSecondary">#FFFFFF</color>
+
+    <color name="accent">#00CEC9</color>
+    <color name="onAccent">#121212</color>
+
+    <color name="background">#F8F9FC</color>
+    <color name="onBackground">#1B1D29</color>
+
+    <color name="surface">#FFFFFF</color>
+    <color name="onSurface">#1B1D29</color>
+    <color name="onSurfaceVariant">#6B7280</color>
+
+    <color name="success">#2ECC71</color>
+    <color name="warning">#F39C12</color>
+    <color name="error">#E53935</color>
+    <color name="onError">#FFFFFF</color>
+
+    <color name="dark_background">#121212</color>
+    <color name="dark_surface">#1E1E1E</color>
+    <color name="dark_onSurface">#E1E1E1</color>
+
+    <color name="divider">#E6E8EF</color>
+    <color name="disabled">#BDBDBD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="glass_white">#CCFFFFFF</color>
+    <color name="portal_glow">#406C5CE7</color>
+</resources>

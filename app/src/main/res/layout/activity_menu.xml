@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <View
+        android:id="@+id/menuHeader"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/bg_splash_gradient"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtMenuTitle"
+        style="@style/TextAppearance.PortalNexus.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/grid_24"
+        android:layout_marginTop="@dimen/grid_64"
+        android:text="@string/main_menu"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/grid_16"
+        android:layout_marginTop="@dimen/grid_24"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/menuHeader">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCharacters"
+            style="@style/Widget.PortalNexus.Card"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_margin="@dimen/grid_8"
+            android:layout_weight="1"
+            app:cardCornerRadius="@dimen/radius_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/grid_16">
+
+                <ImageView
+                    android:layout_width="@dimen/grid_64"
+                    android:layout_height="@dimen/grid_64"
+                    android:src="@drawable/iconapp"
+                    android:contentDescription="@string/characters" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_12"
+                    android:text="@string/characters"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardEmployees"
+            style="@style/Widget.PortalNexus.Card"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_margin="@dimen/grid_8"
+            android:layout_weight="1"
+            app:cardCornerRadius="@dimen/radius_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/grid_16">
+
+                <ImageView
+                    android:layout_width="@dimen/grid_64"
+                    android:layout_height="@dimen/grid_64"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:contentDescription="@string/employees"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_12"
+                    android:text="@string/employees"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/grid_24"
+        android:text="@string/logout"
+        android:textColor="@color/error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

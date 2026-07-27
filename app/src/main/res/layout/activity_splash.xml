@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash_gradient"
+    app:layoutDescription="@xml/motion_scene_splash">
+
+    <View
+        android:id="@+id/portal"
+        android:layout_width="@dimen/portal_size"
+        android:layout_height="@dimen/portal_size"
+        android:background="@drawable/bg_portal_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="@dimen/logo_splash_size"
+        android:layout_height="@dimen/logo_splash_size"
+        android:src="@drawable/iconapp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="@+id/portal"
+        app:layout_constraintEnd_toEndOf="@+id/portal"
+        app:layout_constraintStart_toStartOf="@+id/portal"
+        app:layout_constraintTop_toTopOf="@+id/portal" />
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/portal" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

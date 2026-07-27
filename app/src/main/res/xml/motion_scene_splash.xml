@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="2000">
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="10"
+                app:motionTarget="@+id/imgLogo" />
+
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="25"
+                app:motionTarget="@+id/imgLogo" />
+
+            <KeyAttribute
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                app:framePosition="40"
+                app:motionTarget="@+id/portal" />
+
+            <KeyAttribute
+                android:rotation="360"
+                app:framePosition="60"
+                app:motionTarget="@+id/imgLogo" />
+
+            <KeyAttribute
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                app:framePosition="90"
+                app:motionTarget="@+id/portal" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="100"
+                app:motionTarget="@+id/motionLayout" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/portal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/imgLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0"
+            app:layout_constraintBottom_toBottomOf="@+id/portal"
+            app:layout_constraintEnd_toEndOf="@+id/portal"
+            app:layout_constraintStart_toStartOf="@+id/portal"
+            app:layout_constraintTop_toTopOf="@+id/portal" />
+        <Constraint
+            android:id="@+id/txtAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            app:layout_constraintTop_toBottomOf="@+id/portal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/portal"
+            android:layout_width="@dimen/portal_size"
+            android:layout_height="@dimen/portal_size"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/imgLogo"
+            android:layout_width="@dimen/logo_splash_size"
+            android:layout_height="@dimen/logo_splash_size"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="@+id/portal"
+            app:layout_constraintEnd_toEndOf="@+id/portal"
+            app:layout_constraintStart_toStartOf="@+id/portal"
+            app:layout_constraintTop_toTopOf="@+id/portal" />
+        <Constraint
+            android:id="@+id/txtAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            android:layout_marginTop="@dimen/grid_32"
+            app:layout_constraintTop_toBottomOf="@+id/portal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+</MotionScene>

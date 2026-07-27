@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearance.PortalNexus.Button" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">@dimen/radius_button</item>
+    </style>
+
+    <style name="ShapeAppearance.PortalNexus.Card" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/radius_card</item>
+    </style>
+
+    <style name="ShapeAppearance.PortalNexus.Input" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">@dimen/radius_input</item>
+    </style>
+
+    <style name="ShapeAppearance.PortalNexus.Dialog" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/radius_dialog</item>
+    </style>
+
+    <style name="ShapeAppearance.PortalNexus.BottomSheet" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSizeTopLeft">@dimen/radius_bottom_sheet</item>
+        <item name="cornerSizeTopRight">@dimen/radius_bottom_sheet</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+</resources>

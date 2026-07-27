@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grid_2">2dp</dimen>
+    <dimen name="grid_4">4dp</dimen>
+    <dimen name="grid_8">8dp</dimen>
+    <dimen name="grid_12">12dp</dimen>
+    <dimen name="grid_16">16dp</dimen>
+    <dimen name="grid_20">20dp</dimen>
+    <dimen name="grid_24">24dp</dimen>
+    <dimen name="grid_32">32dp</dimen>
+    <dimen name="grid_40">40dp</dimen>
+    <dimen name="grid_48">48dp</dimen>
+    <dimen name="grid_64">64dp</dimen>
+
+    <dimen name="radius_button">16dp</dimen>
+    <dimen name="radius_card">20dp</dimen>
+    <dimen name="radius_input">16dp</dimen>
+    <dimen name="radius_dialog">24dp</dimen>
+    <dimen name="radius_bottom_sheet">28dp</dimen>
+    <dimen name="radius_circular">100dp</dimen>
+    <dimen name="radius_badge">999dp</dimen>
+
+    <dimen name="icon_small">20dp</dimen>
+    <dimen name="icon_medium">24dp</dimen>
+    <dimen name="icon_large">28dp</dimen>
+    <dimen name="icon_extra_large">32dp</dimen>
+
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="input_height">56dp</dimen>
+    <dimen name="toolbar_height">64dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="avatar_size">48dp</dimen>
+    <dimen name="hero_header_height">320dp</dimen>
+    <dimen name="portal_size">200dp</dimen>
+    <dimen name="logo_splash_size">120dp</dimen>
+</resources>
