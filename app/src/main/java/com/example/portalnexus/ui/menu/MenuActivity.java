@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.portalnexus.R;
 import com.example.portalnexus.databinding.ActivityMenuBinding;
 import com.example.portalnexus.ui.characters.CharacterListActivity;
 import com.example.portalnexus.ui.employees.EmployeeListActivity;
@@ -47,16 +46,11 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         binding.btnLogout.setOnClickListener(v -> {
-            DialogHelper.showCustomDialog(this, 
-                    R.drawable.iconapp, 
-                    "Encerrar Sessão", 
-                    "Deseja realmente sair do Portal Nexus?", 
-                    "Sair", 
-                    () -> {
-                        sessionManager.logout();
-                        startActivity(new Intent(MenuActivity.this, HomeActivity.class));
-                        finishAffinity();
-                    });
+            DialogHelper.showLogoutConfirmation(this, () -> {
+                sessionManager.logout();
+                startActivity(new Intent(MenuActivity.this, HomeActivity.class));
+                finishAffinity();
+            });
         });
     }
 }

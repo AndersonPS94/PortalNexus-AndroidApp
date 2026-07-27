@@ -50,11 +50,15 @@ public class DialogHelper {
     }
 
     public static void showConfirmation(Context context, String title, String message, Runnable onConfirm) {
-        showCustomDialog(context, android.R.drawable.ic_dialog_alert, title, message, "Sim", onConfirm, false);
+        showCustomDialog(context, android.R.drawable.ic_dialog_alert, title, message, "Sim", onConfirm, context.getColor(R.color.primary));
     }
 
     public static void showDeleteConfirmation(Context context, String title, String message, Runnable onConfirm) {
-        showCustomDialog(context, android.R.drawable.ic_delete, title, "⚠️ " + message, "Excluir", onConfirm, true);
+        showCustomDialog(context, android.R.drawable.ic_delete, title, "⚠️ " + message, "Excluir", onConfirm, context.getColor(R.color.error));
+    }
+
+    public static void showLogoutConfirmation(Context context, Runnable onConfirm) {
+        showCustomDialog(context, android.R.drawable.ic_lock_power_off, "Encerrar Sessão", "Deseja realmente sair do Portal Nexus?", "Sair", onConfirm, context.getColor(R.color.warning));
     }
 
     public static void showPermissionSettingsDialog(Context context, String title, String message) {
@@ -63,14 +67,14 @@ public class DialogHelper {
             Uri uri = Uri.fromParts("package", context.getPackageName(), null);
             intent.setData(uri);
             context.startActivity(intent);
-        }, false);
+        });
     }
 
     public static void showCustomDialog(Context context, int iconRes, String title, String message, String confirmLabel, Runnable onConfirm) {
-        showCustomDialog(context, iconRes, title, message, confirmLabel, onConfirm, false);
+        showCustomDialog(context, iconRes, title, message, confirmLabel, onConfirm, context.getColor(R.color.primary));
     }
 
-    private static void showCustomDialog(Context context, int iconRes, String title, String message, String confirmLabel, Runnable onConfirm, boolean isDanger) {
+    private static void showCustomDialog(Context context, int iconRes, String title, String message, String confirmLabel, Runnable onConfirm, int accentColor) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_custom, null);
         
         ImageView icon = view.findViewById(R.id.dialogIcon);
@@ -84,13 +88,10 @@ public class DialogHelper {
         txtMsg.setText(message);
         btnConfirm.setText(confirmLabel);
 
-        if (isDanger) {
-            int red = context.getColor(R.color.error);
-            icon.setImageTintList(ColorStateList.valueOf(red));
-            btnConfirm.setBackgroundColor(red);
-            btnConfirm.setTextColor(context.getColor(R.color.white));
-            txtTitle.setTextColor(red);
-        }
+        icon.setImageTintList(ColorStateList.valueOf(accentColor));
+        btnConfirm.setBackgroundColor(accentColor);
+        btnConfirm.setTextColor(context.getColor(R.color.white));
+        txtTitle.setTextColor(accentColor);
 
         AlertDialog dialog = new MaterialAlertDialogBuilder(context)
                 .setView(view)
