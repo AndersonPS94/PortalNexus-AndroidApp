@@ -1,5 +1,6 @@
 package com.example.portalnexus.viewmodel;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
@@ -73,7 +74,7 @@ public class EmployeeViewModelTest {
 
     @Test
     public void addEmployee_callsRepository() {
-        Employee emp = new Employee(0, "Test", "Dev", "t@t.com", 1000, true, null);
+        Employee emp = new Employee(0, "Mock Employee", "Tester", "mock@test.com", 1000, true, null);
         viewModel.addEmployee(emp);
         verify(repository).add(any(), any(), any());
     }
@@ -82,5 +83,27 @@ public class EmployeeViewModelTest {
     public void deleteEmployee_callsRepository() {
         viewModel.deleteEmployee(1);
         verify(repository).delete(any(), anyInt(), any());
+    }
+
+    @Test
+    public void filterEmployees_updatesFilteredList() {
+        java.util.List<Employee> list = new java.util.ArrayList<>();
+        list.add(new Employee(1, "Rick Sanchez", "Scientist", "rick@c137.com", 1000, true, null));
+        list.add(new Employee(2, "Morty Smith", "Assistant", "morty@c137.com", 500, true, null));
+
+        doAnswer(invocation -> {
+            EmployeeRepository.EmployeeListCallback callback = invocation.getArgument(1);
+            callback.onSuccess(list);
+            return null;
+        }).when(repository).getAll(any(), any());
+
+        viewModel.loadEmployees();
+        
+        viewModel.filterEmployees("Rick");
+        assertEquals(1, viewModel.employees.getValue().size());
+        assertEquals("Rick Sanchez", viewModel.employees.getValue().get(0).getName());
+
+        viewModel.filterEmployees("");
+        assertEquals(2, viewModel.employees.getValue().size());
     }
 }

@@ -14,8 +14,9 @@ import java.util.List;
 public class EmployeeViewModel extends AndroidViewModel {
     private final EmployeeRepository repository;
     
-    private final MutableLiveData<List<Employee>> _employees = new MutableLiveData<>();
-    public LiveData<List<Employee>> employees = _employees;
+    private final MutableLiveData<List<Employee>> _employees = new MutableLiveData<>(new java.util.ArrayList<>());
+    private final MutableLiveData<List<Employee>> _filteredEmployees = new MutableLiveData<>(new java.util.ArrayList<>());
+    public LiveData<List<Employee>> employees = _filteredEmployees;
 
     private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>(false);
     public LiveData<Boolean> isLoading = _isLoading;
@@ -25,6 +26,8 @@ public class EmployeeViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Boolean> _operationSuccess = new MutableLiveData<>();
     public LiveData<Boolean> operationSuccess = _operationSuccess;
+
+    private String currentQuery = "";
 
     public EmployeeViewModel(@NonNull Application application) {
         super(application);
@@ -37,8 +40,10 @@ public class EmployeeViewModel extends AndroidViewModel {
         repository.getAll(getApplication(), new EmployeeRepository.EmployeeListCallback() {
             @Override
             public void onSuccess(List<Employee> employees) {
+                android.util.Log.d("EmployeeViewModel", "onSuccess: received " + (employees != null ? employees.size() : 0) + " employees");
                 _isLoading.postValue(false);
                 _employees.postValue(employees);
+                applyFilter(employees, currentQuery);
             }
 
             @Override
@@ -47,6 +52,33 @@ public class EmployeeViewModel extends AndroidViewModel {
                 _error.postValue(message);
             }
         });
+    }
+
+    public void filterEmployees(String query) {
+        this.currentQuery = query;
+        applyFilter(_employees.getValue(), query);
+    }
+
+    private void applyFilter(List<Employee> all, String query) {
+        if (all == null || all.isEmpty()) {
+            _filteredEmployees.postValue(new java.util.ArrayList<>());
+            return;
+        }
+
+        if (query == null || query.isEmpty()) {
+            _filteredEmployees.postValue(all);
+            return;
+        }
+
+        String lowerQuery = query.toLowerCase().trim();
+        java.util.List<Employee> filtered = new java.util.ArrayList<>();
+        for (Employee emp : all) {
+            if (emp.getName().toLowerCase().contains(lowerQuery) || 
+                emp.getPosition().toLowerCase().contains(lowerQuery)) {
+                filtered.add(emp);
+            }
+        }
+        _filteredEmployees.postValue(filtered);
     }
 
     public void addEmployee(Employee employee) {

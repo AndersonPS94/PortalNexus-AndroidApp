@@ -42,6 +42,17 @@ public class EmployeeListActivity extends AppCompatActivity {
         setupListeners();
         
         viewModel.loadEmployees();
+        setupSearch();
+    }
+
+    private void setupSearch() {
+        binding.editSearch.addTextChangedListener(new android.text.TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                viewModel.filterEmployees(s.toString());
+            }
+            @Override public void afterTextChanged(android.text.Editable s) {}
+        });
     }
 
     @Override
@@ -74,6 +85,7 @@ public class EmployeeListActivity extends AppCompatActivity {
 
     private void setupObservers() {
         viewModel.employees.observe(this, employees -> {
+            android.util.Log.d("EmployeeList", "Observer received " + (employees != null ? employees.size() : 0) + " employees");
             adapter.submitList(employees);
             binding.swipeRefresh.setRefreshing(false);
         });

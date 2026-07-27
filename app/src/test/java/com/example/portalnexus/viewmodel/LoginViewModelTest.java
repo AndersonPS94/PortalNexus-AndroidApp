@@ -7,22 +7,17 @@ import static org.junit.Assert.assertTrue;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
+
+import com.example.portalnexus.data.repository.LoginRepository;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
-import android.os.Looper;
-import android.os.Handler;
 import org.mockito.MockedStatic;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
 
 public class LoginViewModelTest {
 
@@ -30,10 +25,23 @@ public class LoginViewModelTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     private LoginViewModel viewModel;
+    private LoginRepository repository;
+    private MockedStatic<LoginRepository> mockedRepository;
 
     @Before
     public void setUp() {
+        repository = mock(LoginRepository.class);
+        mockedRepository = mockStatic(LoginRepository.class);
+        mockedRepository.when(LoginRepository::getInstance).thenReturn(repository);
+        
         viewModel = new LoginViewModel();
+    }
+
+    @After
+    public void tearDown() {
+        if (mockedRepository != null) {
+            mockedRepository.close();
+        }
     }
 
     @Test
@@ -49,7 +57,8 @@ public class LoginViewModelTest {
     }
 
     @Test
-    public void login_validCredentials_emitsSuccess() {
-        assertTrue(true);
+    public void login_validCredentials_startsLoading() {
+        viewModel.login("mock@empresa.com", "123456");
+        assertTrue(viewModel.isLoading.getValue());
     }
 }

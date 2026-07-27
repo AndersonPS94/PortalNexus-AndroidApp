@@ -1,12 +1,15 @@
 package com.example.portalnexus.data.repository;
 
-import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.example.portalnexus.data.model.Employee;
+import com.example.portalnexus.service.EmployeeService;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,6 +27,9 @@ public class EmployeeRepositoryTest {
     private Context mockContext;
 
     @Mock
+    private EmployeeService mockService;
+
+    @Mock
     private EmployeeRepository.EmployeeListCallback mockListCallback;
 
     @Mock
@@ -33,7 +39,7 @@ public class EmployeeRepositoryTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockedLog = mockStatic(Log.class);
-        repository = EmployeeRepository.getInstance();
+        repository = new EmployeeRepository(mockService);
     }
 
     @After
@@ -46,19 +52,19 @@ public class EmployeeRepositoryTest {
     @Test
     public void getAll_callsService() {
         repository.getAll(mockContext, mockListCallback);
-        assertNotNull(repository);
+        verify(mockService).getAll(any());
     }
 
     @Test
     public void add_callsService() {
-        Employee newEmployee = new Employee(0, "Test", "Dev", "test@test.com", 1000.0, true, null);
+        Employee newEmployee = new Employee(0, "Mock Employee", "Tester", "mock@test.com", 1000.0, true, null);
         repository.add(mockContext, newEmployee, mockActionCallback);
-        assertNotNull(newEmployee);
+        verify(mockService).add(any(), any());
     }
 
     @Test
     public void delete_callsService() {
         repository.delete(mockContext, 1, mockActionCallback);
-        assertNotNull(repository);
+        verify(mockService).delete(anyInt(), any());
     }
 }
