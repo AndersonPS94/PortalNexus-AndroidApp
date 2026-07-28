@@ -1,83 +1,275 @@
-# Portal Nexus - Teste Técnico Android
+# Portal Nexus — Teste Técnico Android Nativo
 
-O **Portal Nexus** é um aplicativo Android nativo premium, desenvolvido para demonstrar competências avançadas em arquitetura, design e integração de sistemas. O projeto unifica o multiverso da API Rick and Morty com uma gestão corporativa de funcionários, tudo sob uma interface futurista inspirada em tendências como Linear e Stripe.
+Aplicativo Android nativo em **Java** com Splash animada, autenticação via backend próprio (Grails + MySQL), listagem paginada da API pública Rick and Morty, tela de perfil com câmera nativa e módulo de CRUD de funcionários.
 
-## 🚀 Tecnologias e Dependências
+> **Backend (Grails + MySQL):** repositório/pasta separada `backend-grails`  
+> *(Ajuste o link abaixo para o repositório público real do backend)*  
+> Backend: [backend-grails](https://github.com/AndersonPS94/backend-grails)
 
-*   **Linguagem:** Java (Rigor técnico solicitado)
-*   **Networking:** OkHttp3 (Chamadas puras para controle total)
-*   **JSON Parsing:** Gson
-*   **Image Loading:** Glide (com cache e transformações)
-*   **Animações:** MotionLayout e MotionScene (Splash Premium)
-*   **UI:** Material Design 3 (Android 15 ready), ConstraintLayout, ViewBinding
-*   **Jetpack:** ViewModel, LiveData, Activity Result API (Câmera), Core-SplashScreen
-*   **Testes:** JUnit 4, Mockito, Espresso (UI Tests)
-*   **CI/CD:** GitHub Actions (Pipeline automatizado)
+---
 
-## 🏗️ Arquitetura e Padrões
+## Tecnologias e dependências
 
-O projeto segue rigorosamente os princípios de **Clean Architecture** e **MVVM (Model-View-ViewModel)**:
+| Área | Tecnologia |
+|------|------------|
+| Linguagem | Java |
+| UI | Views/XML, Material Design 3, ConstraintLayout, ViewBinding |
+| Arquitetura | MVVM (ViewModel + LiveData) |
+| Networking | OkHttp3 |
+| JSON | Gson |
+| Imagens | Glide |
+| Splash | MotionLayout + AndroidX Core SplashScreen |
+| Câmera | Activity Result API + FileProvider |
+| Listas | RecyclerView + DiffUtil |
+| Testes | JUnit 4, Mockito, Espresso |
+| CI/CD | GitHub Actions |
+| SDK | compileSdk / targetSdk **34**, minSdk **24** |
 
-*   **View Layer:** Activities que observam mudanças de estado.
-*   **ViewModel Layer:** Lógica de negócio e estado da UI preservado.
-*   **Repository Layer:** Padrão Singleton mediando fontes de dados locais e remotas.
-*   **Service Layer:** Abstração total da camada de rede (OkHttp3).
-*   **SOLID & Clean Code:** Código desacoplado, testável e sem comentários desnecessários.
+---
 
-## 📂 Estrutura de Pastas
+## Arquitetura
+
+O app segue **MVVM** com separação de camadas:
+
+- **UI (`ui/`)** — Activities, layouts XML, observação de LiveData  
+- **ViewModel (`viewmodel/`)** — Estado da tela e regras de apresentação  
+- **Repository (`data/repository/`)** — Mediação de dados (Singleton)  
+- **Service (`service/`)** — Chamadas HTTP com OkHttp3  
+- **Model (`data/model/`)** — POJOs (Character, Employee, etc.)
 
 ```text
 app/src/main/java/com/example/portalnexus/
-├── adapter/        # Adaptadores RecyclerView (DiffUtil)
+├── adapter/          # RecyclerView + DiffUtil
 ├── data/
-│   ├── model/      # Modelos POJO (Character, Employee)
-│   └── repository/ # Repositórios (Singletons)
-├── service/        # Remote Data Sources (OkHttp implementações)
-├── ui/             # Camadas visuais organizadas por feature
-│   ├── splash/     # Splash animada (MotionLayout)
-│   ├── home/       # Landing page
-│   ├── login/      # Autenticação real
-│   ├── menu/       # Dashboard principal
-│   ├── characters/ # Rick & Morty Integration
-│   ├── profile/    # Detalhes Hero + Câmera
-│   └── employees/  # CRUD de funcionários
-├── utils/          # Helpers (Permission, Network, Dialogs)
-└── viewmodel/      # Lógica reativa (LiveData)
+│   ├── model/
+│   └── repository/
+├── service/          # OkHttp (Auth, Character, Employee)
+├── ui/
+│   ├── splash/
+│   ├── home/
+│   ├── login/
+│   ├── menu/
+│   ├── characters/
+│   ├── profile/
+│   └── employees/
+├── utils/
+└── viewmodel/
 ```
 
-## 🔄 Fluxo do Aplicativo
+---
 
-1.  **Splash:** Storyboard de 2000ms com abertura de portal.
-2.  **Home:** Introdução imersiva ao nexo.
-3.  **Login:** Autenticação via backend local (`admin@empresa.com` / `123456`).
-4.  **Menu:** Navegação entre Exploração (API) e Gestão (CRUD).
-5.  **Personagens:** Listagem com paginação (pág. 1-3) e filtros triplos dinâmicos.
-6.  **Perfil:** Visão detalhada (12 campos) + Integração com Câmera e Compartilhamento.
-7.  **Funcionários:** Gestão completa com fotos reais capturadas na hora.
+## Fluxo do aplicativo
 
-## 🔌 Integração com Backend (Grails)
-
-O app está configurado para consumir o backend local em **Grails**:
-*   **URL Base:** `http://192.168.1.5:8080` (Ajustável em `Constants.java`)
-*   **Endpoints:** 
-    *   `POST /api/auth/login`
-    *   `GET/POST/PUT/DELETE /api/funcionarios`
-*   **Dica:** Utilize `adb reverse tcp:8080 tcp:8080` para testar com celular físico via USB.
-
-## 🛠️ Como Executar
-
-1.  Clone o projeto.
-2.  Abra no **Android Studio Ladybug (ou superior)**.
-3.  Sincronize o Gradle (JDK 17 recomendado).
-4.  Certifique-se de que o backend local está rodando.
-5.  Execute o app (`Run 'app'`).
-
-## 💡 Decisões Técnicas de Elite
-
-*   **Preservação de Estado:** Uso de `onSaveInstanceState` no RecyclerView para evitar perda de posição no scroll.
-*   **Segurança:** Implementação de **Permission Rationale** para acesso à câmera.
-*   **Performance:** Uso de **Singletons** nos repositórios para otimizar conexões OkHttp.
-*   **Design System:** Grid de 8dp e raios consistentes (Linear/Stripe Style).
+1. **Splash** — MotionLayout (~2s), identidade visual do app  
+2. **Home** — Introdução e acesso ao login  
+3. **Login** — Autenticação no backend (`admin@empresa.com` / `123456`) + sessão local opcional  
+4. **Menu** — Personagens (API pública) e Funcionários (CRUD backend)  
+5. **Personagens** — Paginação até 3 páginas, filtros (status, gênero, espécie) e busca por nome  
+6. **Perfil** — Detalhes do personagem (≥10 campos), câmera nativa, POST simulado (jsonplaceholder)  
+7. **Funcionários** — Listar, cadastrar, editar e excluir via REST local  
 
 ---
-Desenvolvido com excelência por **Anderson Pereira dos Santos**.
+
+## Pré-requisitos
+
+### App Android
+
+- **Android Studio** Ladybug (ou superior)  
+- **JDK 17** (recomendado; o módulo app compila com Java 11 bytecode)  
+- Emulador Android **ou** dispositivo físico com depuração USB  
+
+### Backend (obrigatório para login e CRUD de funcionários)
+
+- **JDK 17+**  
+- **MySQL 8.0+** (ou Docker)  
+- Projeto **backend-grails** (Grails 7 + GORM)  
+
+Instruções detalhadas de banco e Grails estão no README do backend. Resumo abaixo.
+
+---
+
+## Credenciais de teste
+
+| Campo | Valor |
+|-------|--------|
+| E-mail | `admin@empresa.com` |
+| Senha | `123456` |
+
+> Use **exatamente** essas credenciais (mesmo valor do seed do backend e do fallback de demonstração do app).
+
+---
+
+## Base URL do backend no app
+
+Arquivo: `app/src/main/java/com/example/portalnexus/utils/Constants.java`
+
+```java
+public static final String BASE_URL = "http://192.168.1.5:8080";
+```
+
+| Ambiente | URL sugerida | Observação |
+|----------|--------------|------------|
+| Emulador (AVD) | `http://10.0.2.2:8080` | IP padrão do host no emulador Google |
+| Emulador (config atual) | `http://192.168.1.5:8080` | Valor padrão no código — ajuste se necessário |
+| Celular + **adb reverse** | `http://localhost:8080` | Após `adb reverse tcp:8080 tcp:8080` |
+| Celular + rede Wi-Fi | `http://IP_DA_MAQUINA:8080` | Ex.: `http://192.168.1.100:8080` |
+
+O app já possui `network_security_config` permitindo HTTP (cleartext) para hosts locais (`localhost`, `10.0.2.2`, `192.168.1.5`, etc.). Inclua o IP da sua máquina nesse XML se usar rede local.
+
+### Endpoints consumidos
+
+| Método | Endpoint |
+|--------|----------|
+| `POST` | `/api/auth/login` |
+| `GET` | `/api/funcionarios` |
+| `POST` | `/api/funcionarios` |
+| `PUT` | `/api/funcionarios/{id}` |
+| `DELETE` | `/api/funcionarios/{id}` |
+
+APIs públicas:
+
+- Rick and Morty: `https://rickandmortyapi.com/api/character`  
+- POST simulado (câmera): `https://jsonplaceholder.typicode.com/posts`  
+
+---
+
+## Como executar
+
+### 1) Subir o backend (Grails + MySQL)
+
+```bash
+# MySQL (local ou Docker — ver README do backend)
+mysql -u root -p < database/setup.sql
+# ou: docker-compose up -d mysql
+
+cd backend-grails
+./gradlew bootRun
+# Aguarde: http://localhost:8080
+```
+
+Teste rápido:
+
+```bash
+curl http://localhost:8080/api/funcionarios
+
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@empresa.com","senha":"123456"}'
+```
+
+### 2) Emulador
+
+1. Clone este repositório.  
+2. Abra no **Android Studio**.  
+3. Sincronize o Gradle.  
+4. Confirme `Constants.BASE_URL` (`10.0.2.2` ou `192.168.1.5`).  
+5. Com o backend em `localhost:8080`, execute **Run 'app'**.  
+
+### 3) Celular físico — adb reverse (recomendado)
+
+```bash
+adb devices
+adb reverse tcp:8080 tcp:8080
+adb reverse --list
+```
+
+1. Ajuste `BASE_URL` para `http://localhost:8080` **ou** mantenha a porta redirecionada conforme a URL usada.  
+2. Instale/execute o app no dispositivo.  
+3. Login com `admin@empresa.com` / `123456`.  
+
+### 4) Celular físico — rede local
+
+1. Descubra o IP da máquina (`ipconfig` / `hostname -I`).  
+2. Defina `BASE_URL = "http://SEU_IP:8080"`.  
+3. Libere a porta 8080 no firewall, se necessário.  
+4. Celular e PC na **mesma rede Wi-Fi**.  
+
+---
+
+## Funcionalidades implementadas (escopo do teste)
+
+| Requisito | Status |
+|-----------|--------|
+| Splash Activity animada (MotionLayout) | ✅ |
+| Tela inicial + Login com validação e erros | ✅ |
+| Sessão local (“manter logado”) | ✅ |
+| Menu com módulos Personagens e Funcionários | ✅ |
+| Listagem Rick and Morty, até 3 páginas | ✅ |
+| Filtros status / gênero / espécie (+ nome) | ✅ |
+| Card com ≥5 informações + foto | ✅ |
+| Perfil com ≥10 informações | ✅ |
+| Câmera nativa + permissão + FileProvider | ✅ |
+| POST simulado após captura | ✅ |
+| CRUD funcionários via backend local | ✅ |
+| Estados loading / erro / lista vazia | ✅ |
+| Tema claro e **modo escuro** | ✅ |
+| RecyclerView + DiffUtil | ✅ |
+| OkHttp3 + Gson + Glide | ✅ |
+| MVVM + Views/XML | ✅ |
+| SDK 34 | ✅ |
+
+---
+
+## Decisões técnicas
+
+- **MVVM** com LiveData para estado reativo da UI.  
+- **OkHttp3** em todos os requests (backend e APIs públicas).  
+- **DiffUtil** nos adapters de personagens e funcionários.  
+- **SessionManager** (SharedPreferences) para token e “manter logado”.  
+- **Permission rationale** e redirecionamento às configurações para câmera.  
+- **FileProvider** para captura segura de foto.  
+- Cache local de fotos de personagens/funcionários durante o fluxo.  
+- CI com lint, testes unitários e geração de APK debug.  
+
+---
+
+## Testes
+
+```bash
+./gradlew testDebugUnitTest
+./gradlew lintDebug
+./gradlew assembleDebug
+```
+
+Há testes unitários (ViewModels, Repository, NetworkUtils) e instrumentados (login / navegação).
+
+---
+
+## Estrutura da entrega
+
+Conforme o PDF do teste, a entrega pode ser **um ou dois repositórios**:
+
+| Parte | Conteúdo |
+|-------|----------|
+| Este repositório | App Android (Portal Nexus) |
+| `backend-grails` | API Grails + MySQL + README de ambiente |
+
+Ambos devem estar **públicos** e o README de cada um deve permitir subir o fluxo completo.
+
+---
+
+## Itens pendentes / observações
+
+- Ajuste fino de `BASE_URL` conforme emulador vs dispositivo (ver tabela acima).  
+- Resposta de create/update do backend pode vir encapsulada em `funcionario`; o app trata o body de forma tolerante — validar o fluxo completo com o backend no ar.  
+- Campo `dataCriacao` existe no backend; a UI do app prioriza os campos principais do formulário/lista.  
+
+*(Remova ou atualize esta seção se tudo estiver validado ponta a ponta.)*
+
+---
+
+## Checklist mínimo para o avaliador
+
+1. Subir MySQL + `backend-grails` (`./gradlew bootRun`)  
+2. Conferir login via `curl`  
+3. Abrir o app no Android Studio e sincronizar Gradle  
+4. Emulador **ou** `adb reverse tcp:8080 tcp:8080`  
+5. Login: `admin@empresa.com` / `123456`  
+6. Personagens (paginação + filtros + perfil + câmera)  
+7. Funcionários (listar / criar / editar / excluir)  
+
+---
+
+## Licença / autor
+
+Desenvolvido para o **Teste Técnico — Android Nativo Júnior** por **Anderson Pereira dos Santos**.
